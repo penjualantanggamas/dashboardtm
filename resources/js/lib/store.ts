@@ -18,7 +18,7 @@ function createStore<T>(initial: T) {
 export type Sim = 'live' | 'offline' | 'loading' | 'error' | 'empty';
 export function readSim(): Sim {
     if (typeof window === 'undefined') return 'live';
-    const q = window.location.hash.includes('?') ? window.location.hash.split('?')[1] : window.location.search.slice(1);
+    const q = window.location.search.slice(1);
     const v = new URLSearchParams(q).get('sim');
     return (['offline', 'loading', 'error', 'empty'] as const).find((s) => s === v) ?? 'live';
 }
@@ -62,7 +62,9 @@ export const useLive = () => useSyncExternalStore(live.subscribe, live.get, live
 
 // ---------- Tema ----------
 export function getTheme(): 'light' | 'dark' {
-    return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+    const t = document.documentElement.dataset.theme;
+    if (t === 'dark' || t === 'light') return t;
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 export function setTheme(t: 'light' | 'dark') {
     document.documentElement.dataset.theme = t;

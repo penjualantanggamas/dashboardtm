@@ -1,6 +1,7 @@
 import { Head } from '@inertiajs/react';
 import { ShipLanes, ShipLegend } from '@/components/Charts';
 import { Icon } from '@/components/Icon';
+import { ExportMenu } from '@/components/ExportMenu';
 import { Card, Select } from '@/components/UI';
 import { daysLate, LATE_SHIPS, SHIPS, TODAY } from '@/data/sample';
 import { dayMonth, num } from '@/lib/format';
@@ -21,7 +22,7 @@ export default function JadwalKapal() {
             <PageHead
                 title="Jadwal Kedatangan Kapal"
                 subline={<>{ships.length} kapal dalam perjalanan membawa {num(total)} t. {late.length ? <>{late.length} terlambat dari ETA awal; terlama <strong>{LATE_SHIPS.sort((a, b) => daysLate(b) - daysLate(a))[0].name}</strong>, +{daysLate(LATE_SHIPS[0])} hari.</> : 'Semua sesuai ETA awal.'}</>}
-                actions={<button className="btn btn-secondary" onClick={() => window.print()}><Icon name="download" />Export</button>}
+                actions={<ExportMenu data={() => ({ name: 'jadwal-kapal', rows: [['Kapal', 'Komoditas', 'Muatan (t)', 'Asal', 'Berangkat', 'ETA awal', 'Estimasi tiba', 'Terlambat (hari)'], ...ships.map((s) => [s.name, s.commodity, s.load, s.origin, s.departed, s.etaPlanned, s.etaEstimate, daysLate(s)])] })} />}
             />
             <div className="scope">
                 <span className="btn btn-outline num" style={{ cursor: 'default' }}><Icon name="calendar" />20 Okt – 10 Nov 2026</span>

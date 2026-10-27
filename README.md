@@ -21,7 +21,7 @@ Buka http://localhost:8000. Halaman `/` diarahkan ke `/ringkasan`.
 
 ### Preview tanpa Laravel
 ```bash
-npm run preview:build   # → preview/index.html, satu file, bisa dibuka langsung di browser
+npm run preview:build   # → preview/index.html (buka langsung di browser) + preview/artifact.html
 ```
 
 ## Halaman yang sudah dibangun
@@ -36,7 +36,9 @@ npm run preview:build   # → preview/index.html, satu file, bisa dibuka langsun
 Sub-menu lain sudah ada route-nya dan menampilkan state "belum dibangun". Bangun dengan prompt B2 di
 `docs/PROMPTS.md`.
 
-**Uji state:** tambahkan `?sim=loading`, `?sim=error`, `?sim=empty`, atau `?sim=offline` ke URL.
+Di preview, halaman dipilih dengan hash sederhana, mis. `index.html#impor-kuota`.
+
+**Uji state (aplikasi Laravel):** tambahkan `?sim=loading`, `?sim=error`, `?sim=empty`, atau `?sim=offline` ke URL.
 **Tema gelap:** tombol bulan di kanan atas (tersimpan per browser).
 
 ## Struktur

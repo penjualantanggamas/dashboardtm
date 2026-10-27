@@ -48,7 +48,6 @@ export function useDrill() {
 
 const baseMenu = (href: string, extra: MenuItem[] = []): MenuItem[] => [
     { label: 'Lihat detail', icon: 'chevronRight', href },
-    { label: 'Export widget', icon: 'download', onClick: () => window.print() },
     ...extra,
 ];
 

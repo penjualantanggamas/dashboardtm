@@ -1,6 +1,7 @@
 import { Head } from '@inertiajs/react';
 import { ForecastLine, QuotaLegend, QuotaTracks } from '@/components/Charts';
 import { Icon } from '@/components/Icon';
+import { ExportMenu } from '@/components/ExportMenu';
 import { AppLink } from '@/components/AppLink';
 import { Card } from '@/components/UI';
 import { PP_CUMULATIVE, PP_EXHAUST_DATE, PP_EXHAUST_DAYS, PP_RATE_PER_MONTH, QUOTA_HISTORY, QUOTAS, remaining, remainingPct, SHIPS } from '@/data/sample';
@@ -20,7 +21,7 @@ export default function Kuota() {
             <PageHead
                 title="Kuota Impor"
                 subline={<>Kuota {pp.commodity} tersisa {pct(remainingPct(pp))}. Pada laju {num(PP_RATE_PER_MONTH)} t/bulan, sisa {num(remaining(pp))} t habis sekitar <strong>{fullDate(PP_EXHAUST_DATE)}</strong>.</>}
-                actions={<button className="btn btn-secondary" onClick={() => window.print()}><Icon name="download" />Export</button>}
+                actions={<ExportMenu data={() => ({ name: 'kuota-impor-2026', rows: [['Komoditas', 'Kuota (t)', 'Terealisasi (t)', 'Berlayar (t)', 'Sisa (t)'], ...QUOTAS.map((q) => [q.commodity, q.quota, q.realised, q.inTransit, remaining(q)])] })} />}
             />
             <div className="scope"><span className="chip-view">Tahun kuota 2026</span></div>
             <div className="grid">

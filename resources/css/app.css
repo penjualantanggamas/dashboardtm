@@ -45,6 +45,7 @@
     --pill-neutral-bg: #eeeeee;  --pill-neutral-ink: #3d3d3d;
     --flash: rgba(29, 95, 191, 0.10);
     --scrim: rgba(10, 10, 10, 0.2);
+    --avatar-bg: #dfe7f3; --avatar-ink: #1d3f73;
     --float-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
 
     --radius-card: 8px;
@@ -96,8 +97,45 @@
     --pill-neutral-bg: #262626;  --pill-neutral-ink: #cfcfcf;
     --flash: rgba(91, 143, 224, 0.16);
     --scrim: rgba(0, 0, 0, 0.5);
+    --avatar-bg: #22324b; --avatar-ink: #b9cdec;
     --float-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
     color-scheme: dark;
+}
+/* Ikuti tema sistem bila pengguna belum memilih (tema tersimpan menang). */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+        --ground: #111111;
+        --surface: #191919;
+        --raised: #222222;
+        --active: #2a2a2a;
+        --border: #2e2e2e;
+        --rule: #242424;
+        --control: #444444;
+        --text: #f2f2f2;
+        --muted: #b4b4b4;
+        --faint: #949494;
+        --primary: #ffffff;
+        --on-primary: #0a0a0a;
+        --secondary-bg: #2a2a2a;
+        --chart-1: #e8e8e8;
+        --chart-2: #8a8a8a;
+        --chart-3: #5b8fe0;
+        --chart-3-tint: #2c4269;
+        --chart-track: #262626;
+        --grid: #2b2b2b;
+        --positive: #4fa36b;
+        --negative: #ef6b6b;
+        --warning: #e0a050;
+        --pill-positive-bg: #172a1d; --pill-positive-ink: #6fcf8f;
+        --pill-negative-bg: #2c1a1c; --pill-negative-ink: #f08a8a;
+        --pill-warning-bg: #2b2112;  --pill-warning-ink: #e8b46a; --pill-warning-line: #5a4320;
+        --pill-neutral-bg: #262626;  --pill-neutral-ink: #cfcfcf;
+        --flash: rgba(91, 143, 224, 0.16);
+        --scrim: rgba(0, 0, 0, 0.5);
+    --avatar-bg: #22324b; --avatar-ink: #b9cdec;
+        --float-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+        color-scheme: dark;
+    }
 }
 
 * { box-sizing: border-box; }
@@ -154,9 +192,9 @@ h1, h2, h3, p { margin: 0; }
 .user-row { display: flex; align-items: center; gap: 10px; padding: 10px; margin-top: 8px; border-radius: 6px; }
 .avatar {
     width: 28px; height: 28px; border-radius: 50%; flex: none; display: grid; place-items: center;
-    background: #dfe7f3; color: #1d3f73; font-size: 12px; font-weight: 600;
+    background: var(--avatar-bg); color: var(--avatar-ink); font-size: 12px; font-weight: 600;
 }
-:root[data-theme='dark'] .avatar { background: #22324b; color: #b9cdec; }
+
 .user-row small { display: block; color: var(--muted); font-size: 12px; line-height: 16px; }
 
 .main { min-width: 0; padding: 0 var(--pad) 48px; }

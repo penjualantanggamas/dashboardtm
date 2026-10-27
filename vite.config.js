@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 import { fileURLToPath } from 'node:url';
 
 export default defineConfig({
+    define: { __PREVIEW__: 'false' },
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.tsx'],

@@ -1,6 +1,7 @@
 import { Head } from '@inertiajs/react';
 import { useMemo, useState } from 'react';
 import { Icon } from '@/components/Icon';
+import { ExportMenu } from '@/components/ExportMenu';
 import { Card, Select } from '@/components/UI';
 import { SKU_VALUE_TOTAL, SKUS, SKUS_BELOW_MIN } from '@/data/sample';
 import { num, rp } from '@/lib/format';
@@ -40,7 +41,7 @@ export default function PosisiStok() {
             <PageHead
                 title="Posisi Stok"
                 subline={<>{SKUS_BELOW_MIN.length} dari {num(SKUS.length)} SKU di bawah stok minimum. Nilai stok {rp(SKU_VALUE_TOTAL)}.</>}
-                actions={<button className="btn btn-secondary" onClick={() => window.print()}><Icon name="download" />Export</button>}
+                actions={<ExportMenu data={() => ({ name: 'posisi-stok', rows: [['Kode SKU', 'Nama barang', 'Gudang', 'Stok', 'Satuan', 'Minimum', 'Nilai (jt)'], ...rows.map((s) => [s.code, s.name, s.warehouse, s.stock, s.unit, s.minimum, s.value])] })} />}
             />
             <div className="scope">
                 <label className="search" style={{ width: 280 }}>

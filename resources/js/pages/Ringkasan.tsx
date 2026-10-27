@@ -3,7 +3,8 @@ import { useMemo, useState, type DragEvent } from 'react';
 import { AppLink } from '@/components/AppLink';
 import { Thumb } from '@/components/Charts';
 import { Icon } from '@/components/Icon';
-import { Card, Kebab, Select, useOutside } from '@/components/UI';
+import { Card, Select, useOutside } from '@/components/UI';
+import { ExportMenu } from '@/components/ExportMenu';
 import { buildAlerts, LATE_SHIPS, PERIOD_LABEL, QUOTAS, remainingPct } from '@/data/sample';
 import { pct } from '@/lib/format';
 import { BRANCH_OPTIONS, filters, load, readSim, save, useFilters, useLive, WAREHOUSE_OPTIONS } from '@/lib/store';
@@ -59,7 +60,7 @@ export default function Ringkasan() {
                             <Select label="Tampilan" value={DEFAULT_VIEWS[view].label} options={Object.values(DEFAULT_VIEWS).map((v) => v.label)}
                                 onChange={(label) => persist({ ...saved, view: Object.keys(DEFAULT_VIEWS).find((k) => DEFAULT_VIEWS[k].label === label)! })} />
                             <button className="btn btn-secondary hide-sm" onClick={() => setDraft(layout)}>Atur tampilan</button>
-                            <ExportMenu todaySales={todaySales} />
+                            <ExportMenu data={() => ({ name: 'ringkasan-perlu-perhatian', rows: [['Tingkat', 'Hal', 'Modul'], ...buildAlerts(todaySales).map((a) => [a.severity, a.text, a.module])] })} />
                         </>}
                     />
                 )}
@@ -254,23 +255,6 @@ function AddWidgetSheet({ present, onAdd, onClose }: { present: WidgetId[]; onAd
                 <div className="sheet-foot">Widget mengikuti filter cabang dan gudang di halaman.</div>
             </aside>
         </>
-    );
-}
-
-function ExportMenu({ todaySales }: { todaySales: number }) {
-    const csv = () => {
-        const rows = [['Tingkat', 'Hal', 'Modul'], ...buildAlerts(todaySales).map((a) => [a.severity, a.text, a.module])];
-        const blob = new Blob(['﻿' + rows.map((r) => r.map((c) => `"${c.replace(/"/g, '""')}"`).join(';')).join('\n')], { type: 'text/csv' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'ringkasan-perlu-perhatian.csv';
-        a.click();
-    };
-    return (
-        <Kebab label="Export" button={<><Icon name="download" />Export</>} items={[
-                { label: 'Export PDF (cetak)', icon: 'download', onClick: () => window.print() },
-                { label: 'Export Excel (CSV)', icon: 'download', onClick: csv },
-            ]} />
     );
 }
 
