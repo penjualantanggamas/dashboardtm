@@ -433,3 +433,74 @@ Dikoreksi saat build:
 - "Total manifest 21.400 t" dan "Tg. Priok & Perak" tidak sesuai data → 5 kapal · 5.740 t, Tanjung Priok.
 - Dua stempel waktu (Live 18:15:42 dan Last Update 18:14:38) → satu stempel Live di baris atas.
 - Ukuran widget yang tidak berlaku tidak ditampilkan (bukan tombol abu nonaktif).
+
+---
+
+## 16. Penjualan › Laporan Penjualan
+
+Diturunkan dari laporan Excel "Laporan Penjualan Periode 01–24 Oktober 2026" (28 Okt 2026).
+
+**Keputusan pengguna**
+- Cabang: **Surabaya** dan **Tangerang** (menggantikan Jakarta/Surabaya/Medan di data contoh lama).
+- Rekening uang masuk: **BCA PT** dan **BCA 919**.
+- Periode kolom mengikuti tanggal seperti di laporan: 01–10, 12–17, 19–24 Okt. Rentang dipilih lewat
+  filter tanggal di halaman. Tabel menampilkan jumlah hari kerja per periode (9, 6, 6) dan rata-rata
+  per hari kerja, karena panjang periodenya tidak sama.
+- **Outstanding piutang customer** = saldo semua piutang yang belum dibayar per akhir periode (kumulatif).
+- Grafik penjualan bulanan: Jan–Okt 2026, dengan pilihan **tahun** (2026, 2025) dan **cabang**.
+
+**Pertanyaan halaman:** berapa omset kita, dan berapa yang sudah menjadi uang?
+
+**Rumus (wajib cocok di data dan di layar)**
+- Omset = Penjualan cash + Penjualan piutang = Surabaya + Tangerang.
+- Uang masuk = Penjualan cash + Pembayaran piutang customer = BCA PT + BCA 919.
+- Outstanding akhir periode = outstanding awal + piutang baru − pembayaran piutang.
+
+**Data contoh** (lengkap, rupiah penuh: `docs/data/laporan-penjualan-okt-2026.json`)
+
+| | 01–10 Okt (9 hk) | 12–17 Okt (6 hk) | 19–24 Okt (6 hk) | 1–24 Okt |
+|---|---:|---:|---:|---:|
+| Surabaya | 8.742.656.274 | 5.964.781.014 | 5.775.724.462 | 20.483.161.750 |
+| Tangerang | 8.052.356.882 | 5.511.364.857 | 5.323.887.544 | 18.887.609.283 |
+| **Omset** | 16.795.013.156 | 11.476.145.871 | 11.099.612.006 | 39.370.771.033 |
+| Penjualan cash | 6.636.804.179 | 4.522.223.850 | 4.429.763.525 | 15.588.791.554 |
+| Penjualan piutang | 10.158.208.977 | 6.953.922.021 | 6.669.848.481 | 23.781.979.479 |
+| Pembayaran piutang customer | 8.789.013.229 | 6.169.095.410 | 5.912.856.166 | 20.870.964.805 |
+| **Uang masuk** | 15.425.817.408 | 10.691.319.260 | 10.342.619.691 | 36.459.756.359 |
+| BCA PT | 11.039.057.922 | 7.542.535.210 | 7.148.310.459 | 25.729.903.591 |
+| BCA 919 | 4.386.759.486 | 3.148.784.050 | 3.194.309.232 | 10.729.852.768 |
+| Outstanding piutang (akhir) | 28.785.031.868 | 29.569.858.479 | 30.326.850.794 | — |
+
+Outstanding 1 Okt: Rp 27.415.836.120. Naik Rp 2,91 M menjadi Rp 30,33 M per 24 Okt.
+
+**Ringkas (yang tampil di kartu):** omset Rp 39,37 M · cash 39,6% (Rp 15,59 M) · piutang baru Rp 23,78 M ·
+pembayaran piutang Rp 20,87 M (87,8% dari piutang baru) · uang masuk Rp 36,46 M (92,6% dari omset) ·
+rata-rata Rp 1,87 M per hari kerja (Sep 2026: Rp 1,88 M = Rp 48,9 M / 26 hari kerja).
+
+**Bulanan (Rp M, dibulatkan)**
+- 2026: Jan 46,9 · Feb 47,0 · Mar 46,4 · Apr 47,9 · Mei 45,2 · Jun 47,0 · Jul 48,1 · Agu 51,3 · Sep 48,9 ·
+  Okt 39,4 (s.d. 24 Okt; proyeksi akhir bulan 50,6).
+- 2025: Jan 42,8 · Feb 39,1 · Mar 45,0 · Apr 42,9 · Mei 44,6 · Jun 43,6 · Jul 44,1 · Agu 42,7 · Sep 46,5 ·
+  Okt 42,9 · Nov 43,7 · Des 46,6.
+- Per cabang ada di file JSON. Hitung dari nilai rupiah penuh, bukan dari angka bulat ini.
+
+**Susunan halaman (1440px)**
+1. Judul "Laporan Penjualan" + kalimat temuan; kanan: tombol segmen `Dashboard | Format laporan`, Export.
+2. Scope: rentang tanggal `1–24 Okt 2026`, cabang.
+3. KPI strip 4 sel: Omset · Porsi cash · Uang masuk · Outstanding piutang.
+4. XL "Penjualan bulanan" (pilihan tahun + cabang di header kartu) + M "Omset per cabang".
+5. Full "Dari omset ke kas" — **elemen khas halaman**: per periode, batang omset (cash | piutang)
+   di atas batang uang masuk (cash | pembayaran piutang), saldo outstanding di kanan.
+6. L "Rincian per cabang" (tabel) + L "Uang masuk per rekening" (tabel).
+
+**Mode "Format laporan"**: tiga tabel persis urutan Excel (Rincian Penjualan, Rincian Penjualan &
+Pembayaran, Rincian Uang Masuk) dengan rupiah penuh, gaya tabel DESIGN.md §8. Export Excel memakai
+susunan ini.
+
+**Angka:** kartu dan grafik memakai bentuk ringkas (`Rp 39,37 M`, dua desimal di halaman ini karena
+selisih antar-periode kecil); tabel memakai rupiah penuh rata kanan (`Rp 16.795.013.156`); bentuk
+ringkas menampilkan angka penuh saat disorot.
+
+**Dampak ke halaman lain:** filter Cabang di Ringkasan dan widget "Penjualan per area" ikut memakai
+Surabaya/Tangerang; penjualan harian Ringkasan dihitung dari data harian per cabang yang sama
+(1–24 Okt harus sama dengan Rp 39.370.771.033).

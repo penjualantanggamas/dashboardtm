@@ -1,0 +1,453 @@
+{
+ "_catatan": "DATA CONTOH Laporan Penjualan. Rupiah penuh (integer). Hari kerja Senin-Sabtu. Ganti dengan data asli.",
+ "cabang": [
+  "Surabaya",
+  "Tangerang"
+ ],
+ "rekening": [
+  "BCA PT",
+  "BCA 919"
+ ],
+ "periode_laporan": "2026-10-01/2026-10-24",
+ "outstanding_piutang_1_okt": 27415836120,
+ "harian_okt_2026": {
+  "1": {
+   "Surabaya": {
+    "total": 914722277,
+    "cash": 337819343,
+    "piutang": 576902934
+   },
+   "Tangerang": {
+    "total": 828154980,
+    "cash": 341176845,
+    "piutang": 486978135
+   }
+  },
+  "2": {
+   "Surabaya": {
+    "total": 1013869091,
+    "cash": 406577516,
+    "piutang": 607291575
+   },
+   "Tangerang": {
+    "total": 977931304,
+    "cash": 356555376,
+    "piutang": 621375928
+   }
+  },
+  "3": {
+   "Surabaya": {
+    "total": 814214872,
+    "cash": 353580367,
+    "piutang": 460634505
+   },
+   "Tangerang": {
+    "total": 789958751,
+    "cash": 329289302,
+    "piutang": 460669449
+   }
+  },
+  "5": {
+   "Surabaya": {
+    "total": 1028298464,
+    "cash": 387724346,
+    "piutang": 640574118
+   },
+   "Tangerang": {
+    "total": 983951328,
+    "cash": 365860028,
+    "piutang": 618091300
+   }
+  },
+  "6": {
+   "Surabaya": {
+    "total": 1108518762,
+    "cash": 456841244,
+    "piutang": 651677518
+   },
+   "Tangerang": {
+    "total": 929402748,
+    "cash": 367615813,
+    "piutang": 561786935
+   }
+  },
+  "7": {
+   "Surabaya": {
+    "total": 991072063,
+    "cash": 433680811,
+    "piutang": 557391252
+   },
+   "Tangerang": {
+    "total": 885293675,
+    "cash": 385030554,
+    "piutang": 500263121
+   }
+  },
+  "8": {
+   "Surabaya": {
+    "total": 978761703,
+    "cash": 384202656,
+    "piutang": 594559047
+   },
+   "Tangerang": {
+    "total": 924282233,
+    "cash": 341278819,
+    "piutang": 583003414
+   }
+  },
+  "9": {
+   "Surabaya": {
+    "total": 1047766295,
+    "cash": 382853067,
+    "piutang": 664913228
+   },
+   "Tangerang": {
+    "total": 996842484,
+    "cash": 403880260,
+    "piutang": 592962224
+   }
+  },
+  "10": {
+   "Surabaya": {
+    "total": 845432747,
+    "cash": 313943301,
+    "piutang": 531489446
+   },
+   "Tangerang": {
+    "total": 736539379,
+    "cash": 288894531,
+    "piutang": 447644848
+   }
+  },
+  "12": {
+   "Surabaya": {
+    "total": 1038611706,
+    "cash": 414974835,
+    "piutang": 623636871
+   },
+   "Tangerang": {
+    "total": 958496396,
+    "cash": 408108389,
+    "piutang": 550388007
+   }
+  },
+  "13": {
+   "Surabaya": {
+    "total": 1043860736,
+    "cash": 436674876,
+    "piutang": 607185860
+   },
+   "Tangerang": {
+    "total": 918573731,
+    "cash": 362841453,
+    "piutang": 555732278
+   }
+  },
+  "14": {
+   "Surabaya": {
+    "total": 926611224,
+    "cash": 342621803,
+    "piutang": 583989421
+   },
+   "Tangerang": {
+    "total": 893589174,
+    "cash": 329948699,
+    "piutang": 563640475
+   }
+  },
+  "15": {
+   "Surabaya": {
+    "total": 1005903607,
+    "cash": 392860957,
+    "piutang": 613042650
+   },
+   "Tangerang": {
+    "total": 962200777,
+    "cash": 363634080,
+    "piutang": 598566697
+   }
+  },
+  "16": {
+   "Surabaya": {
+    "total": 1122286997,
+    "cash": 432679956,
+    "piutang": 689607041
+   },
+   "Tangerang": {
+    "total": 983144275,
+    "cash": 423698754,
+    "piutang": 559445521
+   }
+  },
+  "17": {
+   "Surabaya": {
+    "total": 827506744,
+    "cash": 305822995,
+    "piutang": 521683749
+   },
+   "Tangerang": {
+    "total": 795360504,
+    "cash": 308357053,
+    "piutang": 487003451
+   }
+  },
+  "19": {
+   "Surabaya": {
+    "total": 871843280,
+    "cash": 356196775,
+    "piutang": 515646505
+   },
+   "Tangerang": {
+    "total": 838796871,
+    "cash": 308291122,
+    "piutang": 530505749
+   }
+  },
+  "20": {
+   "Surabaya": {
+    "total": 1025626032,
+    "cash": 427537756,
+    "piutang": 598088276
+   },
+   "Tangerang": {
+    "total": 889005495,
+    "cash": 383137439,
+    "piutang": 505868056
+   }
+  },
+  "21": {
+   "Surabaya": {
+    "total": 1100233950,
+    "cash": 427930877,
+    "piutang": 672303073
+   },
+   "Tangerang": {
+    "total": 958590917,
+    "cash": 351847278,
+    "piutang": 606743639
+   }
+  },
+  "22": {
+   "Surabaya": {
+    "total": 938708018,
+    "cash": 347235876,
+    "piutang": 591472142
+   },
+   "Tangerang": {
+    "total": 908842238,
+    "cash": 345690981,
+    "piutang": 563151257
+   }
+  },
+  "23": {
+   "Surabaya": {
+    "total": 980275022,
+    "cash": 407767847,
+    "piutang": 572507175
+   },
+   "Tangerang": {
+    "total": 956297663,
+    "cash": 402690045,
+    "piutang": 553607618
+   }
+  },
+  "24": {
+   "Surabaya": {
+    "total": 859038160,
+    "cash": 365040525,
+    "piutang": 493997635
+   },
+   "Tangerang": {
+    "total": 772354360,
+    "cash": 306397004,
+    "piutang": 465957356
+   }
+  }
+ },
+ "periode": [
+  {
+   "name": "01–10 Okt",
+   "workdays": 9,
+   "Surabaya": 8742656274,
+   "Tangerang": 8052356882,
+   "total": 16795013156,
+   "cash": 6636804179,
+   "piutang": 10158208977,
+   "pelunasan": 8789013229,
+   "masuk": 15425817408,
+   "bca_pt": 11039057922,
+   "bca_919": 4386759486,
+   "open": 27415836120,
+   "outstanding": 28785031868
+  },
+  {
+   "name": "12–17 Okt",
+   "workdays": 6,
+   "Surabaya": 5964781014,
+   "Tangerang": 5511364857,
+   "total": 11476145871,
+   "cash": 4522223850,
+   "piutang": 6953922021,
+   "pelunasan": 6169095410,
+   "masuk": 10691319260,
+   "bca_pt": 7542535210,
+   "bca_919": 3148784050,
+   "open": 28785031868,
+   "outstanding": 29569858479
+  },
+  {
+   "name": "19–24 Okt",
+   "workdays": 6,
+   "Surabaya": 5775724462,
+   "Tangerang": 5323887544,
+   "total": 11099612006,
+   "cash": 4429763525,
+   "piutang": 6669848481,
+   "pelunasan": 5912856166,
+   "masuk": 10342619691,
+   "bca_pt": 7148310459,
+   "bca_919": 3194309232,
+   "open": 29569858479,
+   "outstanding": 30326850794
+  }
+ ],
+ "bulanan": {
+  "2025": [
+   {
+    "m": "Jan",
+    "Surabaya": 21891290256,
+    "Tangerang": 20872987169,
+    "total": 42764277425
+   },
+   {
+    "m": "Feb",
+    "Surabaya": 20150482993,
+    "Tangerang": 18959097615,
+    "total": 39109580608
+   },
+   {
+    "m": "Mar",
+    "Surabaya": 23076910106,
+    "Tangerang": 21878982283,
+    "total": 44955892389
+   },
+   {
+    "m": "Apr",
+    "Surabaya": 22425363464,
+    "Tangerang": 20492210677,
+    "total": 42917574141
+   },
+   {
+    "m": "Mei",
+    "Surabaya": 23815133223,
+    "Tangerang": 20762469232,
+    "total": 44577602455
+   },
+   {
+    "m": "Jun",
+    "Surabaya": 23249916380,
+    "Tangerang": 20332718460,
+    "total": 43582634840
+   },
+   {
+    "m": "Jul",
+    "Surabaya": 22893120047,
+    "Tangerang": 21251014536,
+    "total": 44144134583
+   },
+   {
+    "m": "Agu",
+    "Surabaya": 21692518226,
+    "Tangerang": 21004970605,
+    "total": 42697488831
+   },
+   {
+    "m": "Sep",
+    "Surabaya": 24224533226,
+    "Tangerang": 22232613546,
+    "total": 46457146772
+   },
+   {
+    "m": "Okt",
+    "Surabaya": 21771324501,
+    "Tangerang": 21099688862,
+    "total": 42871013363
+   },
+   {
+    "m": "Nov",
+    "Surabaya": 23437288907,
+    "Tangerang": 20244962956,
+    "total": 43682251863
+   },
+   {
+    "m": "Des",
+    "Surabaya": 23677001671,
+    "Tangerang": 22961523932,
+    "total": 46638525603
+   }
+  ],
+  "2026": [
+   {
+    "m": "Jan",
+    "Surabaya": 24915850139,
+    "Tangerang": 22016425633,
+    "total": 46932275772
+   },
+   {
+    "m": "Feb",
+    "Surabaya": 23863350497,
+    "Tangerang": 23105110540,
+    "total": 46968461037
+   },
+   {
+    "m": "Mar",
+    "Surabaya": 23550914063,
+    "Tangerang": 22829550396,
+    "total": 46380464459
+   },
+   {
+    "m": "Apr",
+    "Surabaya": 25810193790,
+    "Tangerang": 22069488072,
+    "total": 47879681862
+   },
+   {
+    "m": "Mei",
+    "Surabaya": 24062213377,
+    "Tangerang": 21151408989,
+    "total": 45213622366
+   },
+   {
+    "m": "Jun",
+    "Surabaya": 24294237089,
+    "Tangerang": 22669346773,
+    "total": 46963583862
+   },
+   {
+    "m": "Jul",
+    "Surabaya": 25698902853,
+    "Tangerang": 22380582195,
+    "total": 48079485048
+   },
+   {
+    "m": "Agu",
+    "Surabaya": 26973512418,
+    "Tangerang": 24366654543,
+    "total": 51340166961
+   },
+   {
+    "m": "Sep",
+    "Surabaya": 25091055518,
+    "Tangerang": 23850812599,
+    "total": 48941868117
+   },
+   {
+    "m": "Okt",
+    "Surabaya": 20483161750,
+    "Tangerang": 18887609283,
+    "total": 39370771033
+   }
+  ]
+ },
+ "_catatan_bulanan": "2026 Okt = s.d. 24 Okt (periode laporan). Proyeksi akhir Okt = omset 1-24 Okt / 21 hari kerja x 27 hari kerja."
+}

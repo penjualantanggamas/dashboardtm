@@ -311,6 +311,138 @@ src/data/sample.ts dengan assertion. Daftarkan widget yang disumbangkan halaman 
 
 ---
 
+## C. Penjualan › Laporan Penjualan
+
+Spesifikasi dan data contoh lengkap: **DESIGN.md §16** dan `docs/data/laporan-penjualan-okt-2026.json`.
+Pastikan Design.md di proyek Stitch sudah diperbarui dengan §16 sebelum menjalankan prompt ini.
+Jalankan berurutan, satu layar per prompt. Kalau hasilnya melenceng, pakai A9.
+
+### A10 — Laporan Penjualan (tampilan dashboard)
+
+```
+Create the "Laporan Penjualan" screen at 1440px, following Design.md (section 16 for this page).
+Same shell as "Ringkasan": labelled sidebar with "Penjualan" expanded showing "Laporan Penjualan"
+(active), "Target vs Realisasi", "Per Pelanggan/Area", "Piutang". Breadcrumb "Penjualan / Laporan
+Penjualan". The page should feel like a calm financial ledger, not a spreadsheet: generous spacing,
+no heavy borders, numbers right-aligned in tabular figures.
+
+Title row: h1 "Laporan Penjualan". Subline, 14px grey: "Omset 1–24 Okt Rp 39,37 M. Pembayaran
+piutang Rp 20,87 M lebih kecil dari piutang baru Rp 23,78 M, sehingga outstanding naik Rp 2,91 M
+menjadi Rp 30,33 M." Right side: a two-option segmented control "Dashboard | Format laporan"
+(Dashboard selected) and a secondary button "Export".
+Scope row: date range button "1–24 Okt 2026" with a calendar icon, select "Semua cabang".
+
+Row 1 — one card split by 1px dividers into 4 KPI cells, no icons:
+- "Omset" — "Rp 39,37 M" (700) — caption "21 hari kerja · Rp 1,87 M per hari (Sep Rp 1,88 M)"
+- "Porsi cash" — "39,6%" — caption "Cash Rp 15,59 M · piutang baru Rp 23,78 M"
+- "Uang masuk" — "Rp 36,46 M" (700) — caption "92,6% dari omset"
+- "Outstanding piutang" — "Rp 30,33 M" (700) — caption "naik Rp 2,91 M sejak 1 Okt" with
+  "naik Rp 2,91 M" in red #c4242a (rising receivables is bad).
+
+Row 2 — card span 8 "Penjualan bulanan". Header right: a small segmented control "2026 | 2025"
+and a select "Semua cabang". Column chart Jan–Okt 2026 in Rp M (values from Design.md §16):
+Jan–Sep bars in ink #141414, Okt bar in #1d5fbf showing 39,4 with label "s.d. 24 Okt", and above
+it a dashed outline continuing to 50,6 labelled "proyeksi 50,6". Square bars, 4 faint gridlines,
+y ticks "0", "20 M", "40 M", "60 M", no y-axis line, flat month labels. A hover tooltip on Agu
+shows "Agustus 2026 · Rp 51,3 M · Surabaya Rp 27,0 M · Tangerang Rp 24,4 M".
+Card span 4 "Omset per cabang": two rows, each with the branch name, a thin bar proportional
+to its share, the share and the compact value: "Surabaya 52,0% Rp 20,48 M", "Tangerang 48,0%
+Rp 18,89 M". Under them, a small grey note "Surabaya unggul di ketiga periode."
+
+Row 3 — full-width card "Dari omset ke kas" (the signature element of this page). One row per
+period: "01–10 Okt · 9 hari kerja", "12–17 Okt · 6 hari kerja", "19–24 Okt · 6 hari kerja".
+Each row has two stacked horizontal bars on one shared scale:
+- top bar "Omset": cash part in ink, piutang part in light grey #d4d4d4; total label at the end
+  ("Rp 16,80 M");
+- bottom bar "Uang masuk": cash part in ink (same length as above), "pembayaran piutang" part in
+  #1d5fbf; total label at the end ("Rp 15,43 M").
+At the right end of each row, a column "Outstanding" with the period-end balance
+("Rp 28,79 M", "Rp 29,57 M", "Rp 30,33 M") and a small red "+Rp 1,37 M", "+Rp 0,78 M",
+"+Rp 0,76 M". Legend in the card header: Cash · Piutang · Pembayaran piutang.
+
+Row 4 — two cards span 6:
+- "Rincian per cabang": table with columns Cabang, 01–10 Okt, 12–17 Okt, 19–24 Okt, Total.
+  Rows Surabaya, Tangerang, Total (Total row in 500 weight). Full rupiah values from Design.md §16,
+  e.g. "Rp 8.742.656.274". Under each period header a grey 12px average per working day: "Rp 1,87 M/hari", "Rp 1,91 M/hari",
+  "Rp 1,85 M/hari".
+- "Uang masuk per rekening": same columns, rows BCA PT, BCA 919, Total.
+Grey sentence-case headers, light row rules, no zebra, no uppercase, numbers right-aligned.
+```
+
+### A11 — Laporan Penjualan (Format laporan)
+
+```
+Duplicate "Laporan Penjualan" and switch the segmented control to "Format laporan".
+Replace rows 2–4 with three report tables, in this order, each in its own full-width card, keeping
+the KPI strip on top. These mirror the company's Excel report so finance staff recognise it, but
+styled by Design.md: no grid of heavy borders, light row rules only, grey sentence-case headers,
+full rupiah values right-aligned.
+1. "Rincian penjualan": No, Cabang, 01–10 Okt, 12–17 Okt, 19–24 Okt, Total. Rows Surabaya,
+   Tangerang, Total. Below the table, one line: "Total omset 1–24 Okt" right-aligned
+   "Rp 39.370.771.033".
+2. "Rincian penjualan & pembayaran": No, Keterangan, three period columns, Total.
+   Group "Penjualan" with indented rows Cash, Piutang, Total. Group "Pembayaran / uang masuk"
+   with indented rows Penjualan cash, Piutang customer, Total. Then "Outstanding piutang customer"
+   (Total column shows "–" because it is a balance, not a sum). Group labels in 500 weight;
+   subtotal rows separated by a slightly stronger rule.
+3. "Rincian uang masuk": No, Rekening, three period columns, Total. Rows BCA PT, BCA 919, Total.
+Use the exact values from Design.md §16.
+```
+
+### A12 — Grafik bulanan: tahun 2025 dan cabang Surabaya
+
+```
+On the "Laporan Penjualan" dashboard view, show the "Penjualan bulanan" card in another state:
+year "2025" selected and branch "Surabaya" selected. Twelve bars Jan–Des 2025 for Surabaya only
+(values in Design.md §16 JSON, e.g. Jan 21,9 · Des 23,7), all in ink, no projection, no blue bar
+because the year is complete. Card subtitle in grey: "Surabaya · total 2025 Rp 272,3 M".
+Change nothing else.
+```
+
+### A13 — Laporan Penjualan versi ponsel (390px)
+
+```
+Create a 390px mobile version of the "Laporan Penjualan" dashboard view. Top bar 48px with menu,
+"Laporan Penjualan" and a bell. Subline sentence, then date range and branch as full-width
+controls. KPI as a 2×2 grid. "Penjualan bulanan" full width, 200px tall, labels every other month.
+"Dari omset ke kas": one period per block, the two bars stacked, outstanding under them.
+Tables become two-line rows: branch or account name with total on line 1, the three periods in
+grey on line 2. The "Format laporan" option stays as a segmented control under the title.
+```
+
+### B3 — Agent: bangun halaman Laporan Penjualan
+
+```
+Gunakan skill design-taste-frontend (references/app-screens.md). Bangun halaman
+Penjualan › Laporan Penjualan di route /penjualan/laporan mengikuti DESIGN.md §16 (menang atas
+hasil Stitch; pakai screenshot Stitch A10–A13 di docs/stitch/ sebagai acuan tata letak jika ada).
+
+Data:
+- Pindahkan data contoh ke rupiah penuh. Sumber: docs/data/laporan-penjualan-okt-2026.json
+  (harian per cabang: total, cash, piutang). Ringkasan harus dihitung dari data harian yang sama;
+  ganti cabang menjadi Surabaya dan Tangerang di filter dan widget area.
+- console.assert untuk setiap rumus §16: omset = cash + piutang = Surabaya + Tangerang;
+  uang masuk = cash + pembayaran piutang = BCA PT + BCA 919; outstanding berantai per periode;
+  1–24 Okt = Rp 39.370.771.033; angka ringkas yang tampil cocok dengan selisih dari angka tampil.
+
+Komponen baru:
+- MonthlyBars (kolom per bulan, pilihan tahun dan cabang, bulan berjalan biru + proyeksi
+  putus-putus, tooltip rincian cabang).
+- CashFlowRows ("Dari omset ke kas", skala bersama untuk semua periode).
+- Tabel rupiah penuh; komponen Money yang menampilkan bentuk ringkas dengan angka penuh di title.
+- Toggle Dashboard | Format laporan (simpan pilihan per pengguna di localStorage, try/catch).
+- Export Excel memakai susunan Format laporan.
+
+Widget baru untuk Ringkasan (registry.tsx): "Uang masuk vs omset" (M) dan "Penjualan bulanan" (XL).
+Daftarkan halaman di config/dashboard.php dan lib/nav.ts (built: true).
+
+Setelah selesai: npm run typecheck, npm run preview:build, lint.mjs --app, inspect.mjs --app di
+1440/768/390. Perbaiki semua FAIL. Laporkan pertanyaan layar, elemen khas, dan data yang harus
+diganti data asli.
+```
+
+---
+
 ## Urutan kerja yang disarankan
 
 1. Konfirmasi sub-menu dan KPI (DESIGN.md §11) dengan manajemen.
