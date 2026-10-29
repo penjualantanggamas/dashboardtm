@@ -443,6 +443,127 @@ diganti data asli.
 
 ---
 
+## D. Penjualan › Outstanding Penjualan
+
+Spesifikasi dan data contoh lengkap: **DESIGN.md §17** dan
+`docs/data/outstanding-penjualan-29-okt-2026.json`. Perbarui Design.md di Stitch dengan §17 dulu.
+
+### A14 — Outstanding Penjualan (tampilan utama)
+
+```
+Create the "Outstanding Penjualan" screen at 1440px following Design.md (section 17).
+Sidebar: "Penjualan" expanded with "Laporan Penjualan", "Outstanding Penjualan" (active),
+"Target vs Realisasi", "Per Pelanggan/Area", "Piutang". Breadcrumb "Penjualan / Outstanding
+Penjualan". Calm ledger feel: generous spacing, light rules, tabular right-aligned numbers.
+
+Title row: h1 "Outstanding Penjualan"; under it a 14px grey line "Pesanan belum terkirim per
+29 Okt 2026"; then the finding, 14px ink: "19 SO dari 18 customer senilai Rp 829,8 jt belum
+terkirim. Pipa Hollow di Gudang Surabaya perlu ditambah 623 batang; 3 customer menunggu barang
+ini." Right side: secondary button "Export".
+Scope row: select "Semua cabang", select "Semua gudang", search field "Cari No. SO, customer, item".
+
+Row 1 — one KPI card split by 1px dividers into 4 cells, no icons:
+- "Nilai belum terkirim" — "Rp 829,8 jt" (700) — caption "19 SO"
+- "Customer menunggu" — "18" — caption "34 baris item"
+- "Perlu ditambah" — "1 item" with the number in red #c4242a — caption "Pipa Hollow · Gudang Surabaya"
+- "Memakai buffer" — "1 item" with the number in amber #92400e — caption "Cat Orange · Gudang Tangerang"
+
+Row 2 — full-width card "Kecukupan stok" (the signature element of this page). Header right: a
+legend: "Stok" (light grey track), "Buffer" (diagonal hatch), "Outstanding" (ink bar),
+"Masuk buffer" (amber hatch), "Kurang" (red). One group per item, sorted: problems first.
+Each group: item name and unit on the left (e.g. "Pipa Hollow · batang"), then one lane per
+warehouse ("Surabaya", "Tangerang"), all lanes of an item on one shared scale. In each lane:
+a 10px light-grey track as long as the stock, its last part hatched as buffer; on top, an ink
+outstanding bar from zero. Where outstanding goes into the buffer, that part is amber-hatched;
+where it goes past the stock, that part is red and extends beyond the track. At the right of
+each lane, in a fixed column: "Outstanding 995 · Stok 432 · Buffer 60" in grey 13px, the
+remainder "Sisa −623" (red if negative), and a status pill: "Perlu ditambah" (pale red),
+"Memakai buffer" (pale amber) or "Cukup" (neutral grey).
+Show these groups from Design.md §17: Pipa Hollow (Surabaya: perlu ditambah, sisa −623;
+Tangerang: cukup, sisa 119), Cat Orange (Tangerang: memakai buffer, sisa −3; Surabaya: cukup,
+sisa 63), Besi Galvanis, Wiremesh M8, Plat Bordes 2 mm (both lanes cukup). Under the groups,
+a text link "Tampilkan 2 item lain (cukup)".
+
+Row 3 — full-width card "SO belum terkirim". Header: a segmented control "Per SO | Per customer"
+(Per SO selected) and grey "19 SO". Table columns: No. SO (Geist Mono), Customer, Gudang,
+Item (one line, comma separated with quantity and unit, e.g. "Pipa Hollow 521 batang, Besi
+Galvanis 64 pcs, CNP 1.8MM 12 pcs", truncated with ellipsis and full text on hover), Nominal
+(full rupiah, right-aligned), Status (a pale red pill "Stok kurang" only on SOs containing
+Pipa Hollow from Gudang Surabaya; nothing on the others). Sorted by nominal, largest first.
+Show 10 rows from Design.md §17, starting with "SO/SBY/2610/0157 · CV Anugerah Teknik ·
+Rp 125.307.023". Footer: "1–10 dari 19" with Sebelumnya / Berikutnya buttons.
+```
+
+### A15 — Panel item: siapa yang menunggu Pipa Hollow
+
+```
+On "Outstanding Penjualan", the user clicked the Pipa Hollow group. Open a right-side panel
+440px wide (white, soft shadow, page dimmed 20%). Title "Pipa Hollow · Gudang Surabaya", close ×.
+Top: three figures in one row: "Outstanding 995 batang", "Stok 432", "Perlu ditambah 623" (red).
+Section "Menunggu barang ini (3 SO)": rows with No. SO in mono, customer, quantity right-aligned:
+"SO/SBY/2610/0142 · PT Maju Lancar · 521 batang", "SO/SBY/2610/0139 · PT Maju Terus ·
+432 batang", "SO/SBY/2610/0156 · PT Bumi Cipta Steel · 42 batang". Total row "995 batang".
+Section "Di gudang lain": one row "Gudang Tangerang · sisa 119 batang setelah buffer" with a
+text link "Lihat Posisi Stok". A grey note at the bottom: "Urutan prioritas SO akan memakai
+tanggal order setelah datanya tersedia." In the main table, the 3 SOs are highlighted with the
+selected-row fill.
+```
+
+### A16 — Per customer (data ratusan customer)
+
+```
+On "Outstanding Penjualan", switch the "SO belum terkirim" card to "Per customer". Each row is
+one customer: name, cabang, number of SO, number of item lines, total nominal (full rupiah,
+right-aligned), and a pale red pill "Stok kurang" if any of its SOs is short. Rows can expand
+(chevron at the left) to show that customer's SOs as indented sub-rows. Expand "TB Makmur Abadi"
+showing its 2 SOs (SO/SBY/2610/0171 Rp 95.548.040 and SO/SBY/2610/0167 Rp 3.085.353, total
+Rp 98.633.393). Above the table: grey "18 customer" and a sort select "Nominal terbesar".
+Footer paging "1–10 dari 18". This view must work for hundreds of customers: no matrix,
+no wrapping rows, sticky header.
+```
+
+### A17 — Versi ponsel (390px)
+
+```
+Create a 390px mobile version of "Outstanding Penjualan". Top bar 48px with menu, title and
+bell. Subtitle and finding sentence. Filters collapse into one row: "Semua gudang" select and a
+"Filter" button. KPI as a 2×2 grid. "Kecukupan stok": one block per item and warehouse with the
+bar full width, and the figures and status on the line under it; problems first. "SO belum
+terkirim" as two-line rows: customer and nominal on line 1, No. SO and items in grey on line 2,
+status pill at the right.
+```
+
+### B4 — Agent: bangun halaman Outstanding Penjualan
+
+```
+Gunakan skill design-taste-frontend (references/app-screens.md). Bangun halaman
+Penjualan › Outstanding Penjualan di route /penjualan/outstanding mengikuti DESIGN.md §17
+(menang atas hasil Stitch; screenshot A14–A17 di docs/stitch/ sebagai acuan tata letak jika ada).
+Tambahkan sub-menu di config/dashboard.php dan lib/nav.ts (label "Outstanding Penjualan", built: true).
+
+Data: resources/js/data/outstanding.ts dibangun dari docs/data/outstanding-penjualan-29-okt-2026.json.
+Bentuk data siap untuk ratusan customer (array SO dengan items[]; stok per item per gudang dengan
+buffer). console.assert: outstanding per item per gudang = jumlah qty SO; sisa = stok − buffer −
+outstanding; status sesuai aturan §17; total nominal = Rp 829.750.774; jumlah customer = 18.
+Item yang sama harus ada di Gudang › Posisi Stok dengan stok yang sama.
+
+Komponen baru:
+- StockCoverage (elemen khas "Kecukupan stok"): skala per item, lajur per gudang, buffer arsir,
+  bagian masuk buffer amber arsir, bagian kurang merah. Urutan masalah dulu.
+- Panel item (sheet kanan) dengan SO yang menunggu dan sisa di gudang lain.
+- Tabel SO dengan mode Per SO / Per customer (baris bisa dibuka), cari, urut, paging 25 per halaman,
+  header sticky. Pencarian dan filter cabang/gudang mengubah KPI dan kalimat temuan.
+- Status buffer: jika buffer 0 untuk semua item, sembunyikan legenda Buffer dan tampilkan "–".
+
+Widget baru untuk Ringkasan: "Pesanan belum terkirim" (M): nilai, jumlah SO, dan item yang perlu
+ditambah. Item "Perlu ditambah" juga masuk panel "Perlu perhatian" (Kritis).
+
+Setelah selesai: npm run typecheck, npm run preview:build, lint.mjs --app, inspect.mjs --app di
+1440/768/390. Perbaiki semua FAIL.
+```
+
+---
+
 ## Urutan kerja yang disarankan
 
 1. Konfirmasi sub-menu dan KPI (DESIGN.md §11) dengan manajemen.

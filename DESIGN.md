@@ -367,7 +367,7 @@ Sumber kebenaran data contoh di kode: `resources/js/data/sample.ts` (dengan asse
 
 | Modul | Sub-menu (halaman) | Widget yang disumbangkan ke Ringkasan |
 |---|---|---|
-| Penjualan | Laporan Penjualan · Target vs Realisasi · Per Pelanggan/Area · Piutang | Penjualan harian vs target · Top 5 pelanggan · Penjualan per area · Umur piutang |
+| Penjualan | Laporan Penjualan · Outstanding Penjualan · Target vs Realisasi · Per Pelanggan/Area · Piutang | Penjualan harian vs target · Top 5 pelanggan · Penjualan per area · Umur piutang |
 | Gudang | Posisi Stok · Mutasi Stok · Stok Kritis & Aging · Stock Opname | Stok kritis · Nilai stok per gudang · Aging stok · Selisih opname |
 | Produksi | Rencana vs Realisasi · Efisiensi Lini (OEE) · Reject & QC · Pemakaian Bahan Baku | Output vs rencana · OEE per lini · Reject rate · Downtime hari ini |
 | Impor | Laporan Impor · Kuota Impor · Jadwal Kedatangan Kapal · Status Dokumen | Sisa kuota per komoditas · Kapal 14 hari ke depan · Nilai impor bulan ini · Dokumen tertahan |
@@ -504,3 +504,99 @@ ringkas menampilkan angka penuh saat disorot.
 **Dampak ke halaman lain:** filter Cabang di Ringkasan dan widget "Penjualan per area" ikut memakai
 Surabaya/Tangerang; penjualan harian Ringkasan dihitung dari data harian per cabang yang sama
 (1–24 Okt harus sama dengan Rp 39.370.771.033).
+
+---
+
+## 17. Penjualan › Outstanding Penjualan
+
+Diturunkan dari contoh "Outstanding Penjualan" (29 Okt 2026). Subjudul halaman: **Pesanan belum
+terkirim**. Jangan tertukar dengan *outstanding piutang* di Laporan Penjualan (sudah dikirim,
+belum dibayar).
+
+**Keputusan pengguna**
+- Outstanding penjualan = pesanan (SO) yang belum terkirim. Ditampilkan per nomor SO.
+- Satuan: Pipa Hollow **batang**, Cat **pail**, item lain **pcs**.
+- Setiap SO punya **cabang** dan **gudang** (Gudang Surabaya, Gudang Tangerang).
+- Tanggal order menyusul; nominal per item menyusul. Saat ini nominal hanya per SO.
+- Customer di data asli bisa ratusan: daftar customer harus bisa dicari, diurutkan, dan dipaging.
+  Tidak ada matriks customer × item.
+
+**Buffer stok (rencana gudang)** — rumus yang dipakai:
+`Sisa = Stok − Buffer − Outstanding`, dihitung **per item per gudang** (stok tidak dijumlah lintas gudang,
+karena kelebihan di satu gudang tidak otomatis menutup kekurangan di gudang lain).
+- **Cukup**: Sisa ≥ 0.
+- **Memakai buffer**: Stok ≥ Outstanding tetapi Sisa < 0. Pesanan bisa dikirim, tetapi buffer berkurang.
+  Keputusan manajemen: boleh atau tidak memakai buffer.
+- **Perlu ditambah**: Stok < Outstanding. Jumlah yang perlu ditambah = −Sisa (memenuhi pesanan dan
+  mengembalikan buffer).
+- Selama buffer belum diatur gudang, nilainya 0 dan kolom Buffer menampilkan "–".
+
+**Pertanyaan halaman:** pesanan mana yang belum terkirim, dan apakah stok cukup untuk memenuhinya?
+
+**Data contoh** (lengkap: `docs/data/outstanding-penjualan-29-okt-2026.json`)
+
+Kecukupan stok per item per gudang:
+
+| Item | Gudang | Outstanding | Stok | Buffer | Sisa | Status |
+|---|---|---:|---:|---:|---:|---|
+| Besi Galvanis | Surabaya | 446 | 949 | 40 | 463 | Cukup |
+| Besi Galvanis | Tangerang | 308 | 847 | 40 | 499 | Cukup |
+| Besi Kait | Surabaya | 432 | 947 | 40 | 475 | Cukup |
+| Besi Kait | Tangerang | 142 | 329 | 40 | 147 | Cukup |
+| CNP 1.8MM | Surabaya | 12 | 74 | 40 | 22 | Cukup |
+| CNP 1.8MM | Tangerang | 178 | 509 | 40 | 291 | Cukup |
+| Cat Orange | Surabaya | 32 | 101 | 6 | 63 | Cukup |
+| Cat Orange | Tangerang | 7 | 10 | 6 | -3 | Memakai buffer |
+| Plat Bordes 2 mm | Surabaya | 659 | 1.572 | 40 | 873 | Cukup |
+| Plat Bordes 2 mm | Tangerang | 61 | 188 | 40 | 87 | Cukup |
+| Pipa Hollow | Surabaya | 995 | 432 | 60 | -623 | Kurang |
+| Pipa Hollow | Tangerang | 80 | 259 | 60 | 119 | Cukup |
+| Wiremesh M8 | Surabaya | 211 | 379 | 40 | 128 | Cukup |
+| Wiremesh M8 | Tangerang | 138 | 265 | 40 | 87 | Cukup |
+
+Pipa Hollow di Gudang Surabaya ditunggu 3 customer: PT Maju Terus 432, PT Maju Lancar 521,
+PT Bumi Cipta Steel 42 (= 995 batang). Gudang Tangerang punya sisa Pipa Hollow 119 batang.
+
+SO belum terkirim (19 SO, 18 customer, 34 baris item, total Rp 829.750.774):
+
+| No. SO | Customer | Gudang | Item | Nominal SO |
+|---|---|---|---|---:|
+| SO/SBY/2610/0157 | CV Anugerah Teknik | Surabaya | Plat Bordes 2 mm 177 pcs, Besi Kait 165 pcs, Besi Galvanis 101 pcs | 125.307.023 |
+| SO/SBY/2610/0171 | TB Makmur Abadi | Surabaya | Plat Bordes 2 mm 145 pcs, Besi Galvanis 65 pcs | 95.548.040 |
+| SO/SBY/2610/0145 | CV Sumber Baja | Surabaya | Wiremesh M8 69 pcs, Plat Bordes 2 mm 103 pcs | 86.279.127 |
+| SO/SBY/2610/0155 | TB Sentosa Jaya | Surabaya | Besi Kait 12 pcs, Plat Bordes 2 mm 134 pcs | 79.705.622 |
+| SO/SBY/2610/0153 | PT Graha Rangka | Surabaya | Plat Bordes 2 mm 100 pcs | 59.621.018 |
+| SO/SBY/2610/0142 | PT Maju Lancar | Surabaya | Besi Galvanis 64 pcs, Pipa Hollow 521 batang, CNP 1.8MM 12 pcs | 57.201.134 |
+| SO/SBY/2610/0164 | PT Cahaya Rangka Baja | Surabaya | Wiremesh M8 142 pcs | 50.380.604 |
+| SO/TGR/2610/0103 | CV Tunas Logam | Tangerang | CNP 1.8MM 178 pcs, Plat Bordes 2 mm 61 pcs | 49.846.045 |
+| SO/TGR/2610/0091 | UD Sinar Bangunan | Tangerang | Wiremesh M8 138 pcs | 49.454.363 |
+| SO/SBY/2610/0139 | PT Maju Terus | Surabaya | Besi Galvanis 42 pcs, Pipa Hollow 432 batang | 45.750.995 |
+| SO/SBY/2610/0156 | PT Bumi Cipta Steel | Surabaya | Pipa Hollow 42 batang, Cat Orange 13 pail, Besi Galvanis 115 pcs | 35.124.993 |
+| SO/TGR/2610/0096 | PT Nusa Atap | Tangerang | Besi Galvanis 168 pcs, Pipa Hollow 80 batang | 31.034.007 |
+| SO/TGR/2610/0095 | PT Duta Konstruksi | Tangerang | Besi Galvanis 140 pcs, Besi Kait 70 pcs | 20.997.877 |
+| SO/SBY/2610/0149 | PT Karya Logam Abadi | Surabaya | Besi Kait 86 pcs, Cat Orange 15 pail | 18.338.420 |
+| SO/TGR/2610/0090 | PT Lancar Terus | Tangerang | Cat Orange 7 pail, Besi Kait 57 pcs | 8.864.572 |
+| SO/SBY/2610/0161 | PT Prima Kanopi | Surabaya | Besi Galvanis 59 pcs | 8.403.333 |
+| SO/SBY/2610/0152 | CV Mitra Besi Utama | Surabaya | Cat Orange 4 pail | 4.534.468 |
+| SO/SBY/2610/0167 | TB Makmur Abadi | Surabaya | Besi Kait 169 pcs | 3.085.353 |
+| SO/TGR/2610/0099 | UD Berkah Material | Tangerang | Besi Kait 15 pcs | 273.780 |
+
+**Ringkas (kartu):** nilai belum terkirim Rp 829,8 jt · 19 SO · 18 customer · 1 item perlu ditambah
+(Pipa Hollow, Gudang Surabaya, 623 batang) · 1 item memakai buffer (Cat Orange, Gudang Tangerang, 3 pail).
+
+**Susunan halaman (1440px)**
+1. Judul "Outstanding Penjualan", subjudul "Pesanan belum terkirim per 29 Okt 2026", kalimat temuan;
+   kanan: Export.
+2. Scope: cabang, gudang, cari (No. SO / customer / item).
+3. KPI strip 4 sel: Nilai belum terkirim · SO / customer menunggu · Perlu ditambah · Memakai buffer.
+4. Full "Kecukupan stok" — **elemen khas halaman**: satu kelompok per item, satu lajur per gudang,
+   satu skala per item. Di setiap lajur: track abu sepanjang stok, dengan buffer sebagai bagian arsir
+   di ujung kanan track; di atasnya batang outstanding ink. Bagian outstanding yang masuk ke buffer
+   diarsir amber, bagian yang melewati stok merah. Di kanan: sisa dan status. Urutan: Perlu ditambah,
+   Memakai buffer, lalu Cukup. Klik item → panel kanan berisi SO yang menunggu item itu, dan sisa item
+   yang sama di gudang lain (petunjuk mutasi antar gudang).
+5. Full "SO belum terkirim": tabel per SO (bisa dikelompokkan per customer), urut nominal terbesar,
+   kolom item ringkas, chip status jika salah satu item kurang stok. Paging "1–25 dari 19".
+
+**Kata dan format:** "Pesanan belum terkirim", "Perlu ditambah", "Memakai buffer", "Cukup",
+"Sisa", "Buffer". Kuantitas dengan satuan (`995 batang`, `7 pail`, `446 pcs`). Nominal tabel rupiah penuh.

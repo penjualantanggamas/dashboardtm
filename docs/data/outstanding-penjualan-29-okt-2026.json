@@ -1,0 +1,498 @@
+{
+ "_catatan": "DATA CONTOH Outstanding Penjualan (pesanan SO belum terkirim) per 29 Okt 2026. Nominal per SO dalam rupiah penuh. Sisa = stok - buffer - outstanding. Ganti dengan data asli.",
+ "items": {
+  "BGV": {
+   "nama": "Besi Galvanis",
+   "satuan": "pcs"
+  },
+  "PHL": {
+   "nama": "Pipa Hollow",
+   "satuan": "batang"
+  },
+  "COR": {
+   "nama": "Cat Orange",
+   "satuan": "pail"
+  },
+  "CNP": {
+   "nama": "CNP 1.8MM",
+   "satuan": "pcs"
+  },
+  "BKT": {
+   "nama": "Besi Kait",
+   "satuan": "pcs"
+  },
+  "WMS": {
+   "nama": "Wiremesh M8",
+   "satuan": "pcs"
+  },
+  "PBD": {
+   "nama": "Plat Bordes 2 mm",
+   "satuan": "pcs"
+  }
+ },
+ "so": [
+  {
+   "so": "SO/SBY/2610/0139",
+   "customer": "PT Maju Terus",
+   "cabang": "Surabaya",
+   "gudang": "Gudang Surabaya",
+   "nominal": 45750995,
+   "items": [
+    {
+     "kode": "BGV",
+     "qty": 42
+    },
+    {
+     "kode": "PHL",
+     "qty": 432
+    }
+   ]
+  },
+  {
+   "so": "SO/SBY/2610/0142",
+   "customer": "PT Maju Lancar",
+   "cabang": "Surabaya",
+   "gudang": "Gudang Surabaya",
+   "nominal": 57201134,
+   "items": [
+    {
+     "kode": "BGV",
+     "qty": 64
+    },
+    {
+     "kode": "PHL",
+     "qty": 521
+    },
+    {
+     "kode": "CNP",
+     "qty": 12
+    }
+   ]
+  },
+  {
+   "so": "SO/TGR/2610/0090",
+   "customer": "PT Lancar Terus",
+   "cabang": "Tangerang",
+   "gudang": "Gudang Tangerang",
+   "nominal": 8864572,
+   "items": [
+    {
+     "kode": "COR",
+     "qty": 7
+    },
+    {
+     "kode": "BKT",
+     "qty": 57
+    }
+   ]
+  },
+  {
+   "so": "SO/SBY/2610/0145",
+   "customer": "CV Sumber Baja",
+   "cabang": "Surabaya",
+   "gudang": "Gudang Surabaya",
+   "nominal": 86279127,
+   "items": [
+    {
+     "kode": "WMS",
+     "qty": 69
+    },
+    {
+     "kode": "PBD",
+     "qty": 103
+    }
+   ]
+  },
+  {
+   "so": "SO/SBY/2610/0149",
+   "customer": "PT Karya Logam Abadi",
+   "cabang": "Surabaya",
+   "gudang": "Gudang Surabaya",
+   "nominal": 18338420,
+   "items": [
+    {
+     "kode": "BKT",
+     "qty": 86
+    },
+    {
+     "kode": "COR",
+     "qty": 15
+    }
+   ]
+  },
+  {
+   "so": "SO/TGR/2610/0091",
+   "customer": "UD Sinar Bangunan",
+   "cabang": "Tangerang",
+   "gudang": "Gudang Tangerang",
+   "nominal": 49454363,
+   "items": [
+    {
+     "kode": "WMS",
+     "qty": 138
+    }
+   ]
+  },
+  {
+   "so": "SO/TGR/2610/0095",
+   "customer": "PT Duta Konstruksi",
+   "cabang": "Tangerang",
+   "gudang": "Gudang Tangerang",
+   "nominal": 20997877,
+   "items": [
+    {
+     "kode": "BGV",
+     "qty": 140
+    },
+    {
+     "kode": "BKT",
+     "qty": 70
+    }
+   ]
+  },
+  {
+   "so": "SO/SBY/2610/0152",
+   "customer": "CV Mitra Besi Utama",
+   "cabang": "Surabaya",
+   "gudang": "Gudang Surabaya",
+   "nominal": 4534468,
+   "items": [
+    {
+     "kode": "COR",
+     "qty": 4
+    }
+   ]
+  },
+  {
+   "so": "SO/SBY/2610/0153",
+   "customer": "PT Graha Rangka",
+   "cabang": "Surabaya",
+   "gudang": "Gudang Surabaya",
+   "nominal": 59621018,
+   "items": [
+    {
+     "kode": "PBD",
+     "qty": 100
+    }
+   ]
+  },
+  {
+   "so": "SO/SBY/2610/0155",
+   "customer": "TB Sentosa Jaya",
+   "cabang": "Surabaya",
+   "gudang": "Gudang Surabaya",
+   "nominal": 79705622,
+   "items": [
+    {
+     "kode": "BKT",
+     "qty": 12
+    },
+    {
+     "kode": "PBD",
+     "qty": 134
+    }
+   ]
+  },
+  {
+   "so": "SO/SBY/2610/0156",
+   "customer": "PT Bumi Cipta Steel",
+   "cabang": "Surabaya",
+   "gudang": "Gudang Surabaya",
+   "nominal": 35124993,
+   "items": [
+    {
+     "kode": "PHL",
+     "qty": 42
+    },
+    {
+     "kode": "COR",
+     "qty": 13
+    },
+    {
+     "kode": "BGV",
+     "qty": 115
+    }
+   ]
+  },
+  {
+   "so": "SO/SBY/2610/0157",
+   "customer": "CV Anugerah Teknik",
+   "cabang": "Surabaya",
+   "gudang": "Gudang Surabaya",
+   "nominal": 125307023,
+   "items": [
+    {
+     "kode": "PBD",
+     "qty": 177
+    },
+    {
+     "kode": "BKT",
+     "qty": 165
+    },
+    {
+     "kode": "BGV",
+     "qty": 101
+    }
+   ]
+  },
+  {
+   "so": "SO/TGR/2610/0096",
+   "customer": "PT Nusa Atap",
+   "cabang": "Tangerang",
+   "gudang": "Gudang Tangerang",
+   "nominal": 31034007,
+   "items": [
+    {
+     "kode": "BGV",
+     "qty": 168
+    },
+    {
+     "kode": "PHL",
+     "qty": 80
+    }
+   ]
+  },
+  {
+   "so": "SO/TGR/2610/0099",
+   "customer": "UD Berkah Material",
+   "cabang": "Tangerang",
+   "gudang": "Gudang Tangerang",
+   "nominal": 273780,
+   "items": [
+    {
+     "kode": "BKT",
+     "qty": 15
+    }
+   ]
+  },
+  {
+   "so": "SO/SBY/2610/0161",
+   "customer": "PT Prima Kanopi",
+   "cabang": "Surabaya",
+   "gudang": "Gudang Surabaya",
+   "nominal": 8403333,
+   "items": [
+    {
+     "kode": "BGV",
+     "qty": 59
+    }
+   ]
+  },
+  {
+   "so": "SO/TGR/2610/0103",
+   "customer": "CV Tunas Logam",
+   "cabang": "Tangerang",
+   "gudang": "Gudang Tangerang",
+   "nominal": 49846045,
+   "items": [
+    {
+     "kode": "CNP",
+     "qty": 178
+    },
+    {
+     "kode": "PBD",
+     "qty": 61
+    }
+   ]
+  },
+  {
+   "so": "SO/SBY/2610/0164",
+   "customer": "PT Cahaya Rangka Baja",
+   "cabang": "Surabaya",
+   "gudang": "Gudang Surabaya",
+   "nominal": 50380604,
+   "items": [
+    {
+     "kode": "WMS",
+     "qty": 142
+    }
+   ]
+  },
+  {
+   "so": "SO/SBY/2610/0167",
+   "customer": "TB Makmur Abadi",
+   "cabang": "Surabaya",
+   "gudang": "Gudang Surabaya",
+   "nominal": 3085353,
+   "items": [
+    {
+     "kode": "BKT",
+     "qty": 169
+    }
+   ]
+  },
+  {
+   "so": "SO/SBY/2610/0171",
+   "customer": "TB Makmur Abadi",
+   "cabang": "Surabaya",
+   "gudang": "Gudang Surabaya",
+   "nominal": 95548040,
+   "items": [
+    {
+     "kode": "PBD",
+     "qty": 145
+    },
+    {
+     "kode": "BGV",
+     "qty": 65
+    }
+   ]
+  }
+ ],
+ "stok": [
+  {
+   "kode": "BGV",
+   "item": "Besi Galvanis",
+   "satuan": "pcs",
+   "gudang": "Gudang Surabaya",
+   "outstanding": 446,
+   "stok": 949,
+   "buffer": 40,
+   "sisa": 463,
+   "status": "Cukup"
+  },
+  {
+   "kode": "BGV",
+   "item": "Besi Galvanis",
+   "satuan": "pcs",
+   "gudang": "Gudang Tangerang",
+   "outstanding": 308,
+   "stok": 847,
+   "buffer": 40,
+   "sisa": 499,
+   "status": "Cukup"
+  },
+  {
+   "kode": "BKT",
+   "item": "Besi Kait",
+   "satuan": "pcs",
+   "gudang": "Gudang Surabaya",
+   "outstanding": 432,
+   "stok": 947,
+   "buffer": 40,
+   "sisa": 475,
+   "status": "Cukup"
+  },
+  {
+   "kode": "BKT",
+   "item": "Besi Kait",
+   "satuan": "pcs",
+   "gudang": "Gudang Tangerang",
+   "outstanding": 142,
+   "stok": 329,
+   "buffer": 40,
+   "sisa": 147,
+   "status": "Cukup"
+  },
+  {
+   "kode": "CNP",
+   "item": "CNP 1.8MM",
+   "satuan": "pcs",
+   "gudang": "Gudang Surabaya",
+   "outstanding": 12,
+   "stok": 74,
+   "buffer": 40,
+   "sisa": 22,
+   "status": "Cukup"
+  },
+  {
+   "kode": "CNP",
+   "item": "CNP 1.8MM",
+   "satuan": "pcs",
+   "gudang": "Gudang Tangerang",
+   "outstanding": 178,
+   "stok": 509,
+   "buffer": 40,
+   "sisa": 291,
+   "status": "Cukup"
+  },
+  {
+   "kode": "COR",
+   "item": "Cat Orange",
+   "satuan": "pail",
+   "gudang": "Gudang Surabaya",
+   "outstanding": 32,
+   "stok": 101,
+   "buffer": 6,
+   "sisa": 63,
+   "status": "Cukup"
+  },
+  {
+   "kode": "COR",
+   "item": "Cat Orange",
+   "satuan": "pail",
+   "gudang": "Gudang Tangerang",
+   "outstanding": 7,
+   "stok": 10,
+   "buffer": 6,
+   "sisa": -3,
+   "status": "Memakai buffer"
+  },
+  {
+   "kode": "PBD",
+   "item": "Plat Bordes 2 mm",
+   "satuan": "pcs",
+   "gudang": "Gudang Surabaya",
+   "outstanding": 659,
+   "stok": 1572,
+   "buffer": 40,
+   "sisa": 873,
+   "status": "Cukup"
+  },
+  {
+   "kode": "PBD",
+   "item": "Plat Bordes 2 mm",
+   "satuan": "pcs",
+   "gudang": "Gudang Tangerang",
+   "outstanding": 61,
+   "stok": 188,
+   "buffer": 40,
+   "sisa": 87,
+   "status": "Cukup"
+  },
+  {
+   "kode": "PHL",
+   "item": "Pipa Hollow",
+   "satuan": "batang",
+   "gudang": "Gudang Surabaya",
+   "outstanding": 995,
+   "stok": 432,
+   "buffer": 60,
+   "sisa": -623,
+   "status": "Kurang"
+  },
+  {
+   "kode": "PHL",
+   "item": "Pipa Hollow",
+   "satuan": "batang",
+   "gudang": "Gudang Tangerang",
+   "outstanding": 80,
+   "stok": 259,
+   "buffer": 60,
+   "sisa": 119,
+   "status": "Cukup"
+  },
+  {
+   "kode": "WMS",
+   "item": "Wiremesh M8",
+   "satuan": "pcs",
+   "gudang": "Gudang Surabaya",
+   "outstanding": 211,
+   "stok": 379,
+   "buffer": 40,
+   "sisa": 128,
+   "status": "Cukup"
+  },
+  {
+   "kode": "WMS",
+   "item": "Wiremesh M8",
+   "satuan": "pcs",
+   "gudang": "Gudang Tangerang",
+   "outstanding": 138,
+   "stok": 265,
+   "buffer": 40,
+   "sisa": 87,
+   "status": "Cukup"
+  }
+ ]
+}
