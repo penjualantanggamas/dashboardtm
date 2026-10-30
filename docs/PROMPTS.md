@@ -564,6 +564,122 @@ Setelah selesai: npm run typecheck, npm run preview:build, lint.mjs --app, inspe
 
 ---
 
+## E. Gudang › Stok Kritis & Aging (eksplorasi)
+
+Konsep dan data contoh: **DESIGN.md §18** dan `docs/data/stok-kritis-aging-30-okt-2026.json`.
+Halaman ini masih eksplorasi: hasil Stitch dipakai untuk memilih arah, bukan final. Perbarui
+Design.md di Stitch dengan §18 dulu.
+
+### A18 — Tab Stok kritis
+
+```
+Create the "Stok Kritis & Aging" screen at 1440px following Design.md (section 18), tab
+"Stok kritis" selected. Sidebar: "Gudang" expanded with "Posisi Stok", "Mutasi Stok",
+"Stok Kritis & Aging" (active), "Stock Opname". Breadcrumb "Gudang / Stok Kritis & Aging".
+Calm ledger feel; colour only for status and the one data hue #1d5fbf.
+
+Title row: h1 "Stok Kritis & Aging". Finding, 14px: "7 dari 20 item perlu tindakan. Pipa Hollow
+kritis di kedua gudang; outstanding SO 995 batang di Surabaya melebihi stok 432." Right side:
+secondary button "Export".
+Under the title: underline tabs "Stok kritis 7 | Aging". Scope row: select "Semua gudang",
+select "Semua kategori", search "Cari item".
+
+Row 1 — one KPI card split into 4 cells, no icons:
+- "Perlu ditambah" — "1" in red #c4242a — caption "Pipa Hollow · Surabaya"
+- "Memakai buffer" — "2" in amber #92400e — caption "Cat Orange, Kawat Bendrat"
+- "Waspada" — "4" — caption "stok di bawah titik pesan ulang"
+- "Cakupan terpendek" — "0 hari" — caption "Pipa Hollow · Surabaya"
+
+Row 2 — full-width card "Prioritas pesan ulang" (signature element). One row per item × warehouse,
+sorted worst first, 7 rows from Design.md §18. Columns: status pill ("Perlu ditambah" pale red,
+"Memakai buffer" pale amber, "Waspada" neutral grey), Item (name + grey warehouse under it),
+then a "Cakupan" timeline column 360px wide on a shared axis 0–30 hari with ticks 0, 7, 14, 21,
+30: an ink bar from 0 to the coverage days (0, 1,8, 5,1, 4,7, 5,6, 6,1, 13,5) and a vertical
+1px #1d5fbf tick at that item's lead time (21, 10, 7, 21, 21, 14, 14 hari) labelled "lead time"
+on the first row only; the gap between bar end and tick is what is missing. Then right-aligned
+columns Stok, Outstanding SO, Buffer, Saran tambah (500 weight, with unit, e.g. "1.308 batang").
+Last column: a ghost button "Lihat SO" on rows with outstanding, and on the CNP 1.8MM row a text
+action "Mutasi dari Tangerang (509 pcs)".
+
+Row 3 — two cards span 6:
+- "Perlu tindakan per gudang": two rows, Surabaya and Tangerang, each a thin stacked bar of
+  status counts (Surabaya: 1 perlu ditambah, 1 waspada; Tangerang: 2 memakai buffer, 3 waspada)
+  with the counts written beside it.
+- "Cara membaca status": a compact key-value well explaining the four statuses in one line each,
+  using the formulas from Design.md §18 in plain words (no code).
+```
+
+### A19 — Tab Aging
+
+```
+Same screen, tab "Aging" selected. Finding line changes to: "Rp 277,8 jt (14,8%) tertahan di
+stok berumur lebih dari 90 hari. Gudang Tangerang menyumbang separuhnya."
+
+Row 1 — KPI card, 4 cells:
+- "Nilai persediaan" — "Rp 1,87 M" (700) — caption "20 item · 2 gudang"
+- "Stok > 90 hari" — "Rp 277,8 jt" (700) — caption "14,8% dari nilai persediaan"
+- "Stok > 180 hari" — "Rp 123,6 jt" — caption "6,6%"
+- "Lambat bergerak" — "3 item" — caption "Rp 212,9 jt"
+
+Row 2 — card span 8 "Umur stok per gudang" (signature element): two horizontal 100% stacked bars
+(Semua gudang on top as a reference, then Surabaya, Tangerang), five segments 0–30, 31–60,
+61–90, 91–180, >180 hari in one hue ramp from very light blue to #1d5fbf, with 2px seams; values
+in Rp under each segment. Segments over 90 days get a thin red underline. Legend as a small table
+under the bars: umur, nilai, persen (980,6 jt 52,3% · 401,6 jt 21,4% · 214,7 jt 11,5% ·
+154,3 jt 8,2% · 123,6 jt 6,6%).
+Card span 4 "Lambat bergerak": 3 rows with item, warehouse, quantity with unit, value, and a grey
+reason ("tanpa pemakaian 90 hari", "cakupan 692 hari", "cakupan 281 hari"). Footer text link
+"Lihat semua item".
+
+Row 3 — full-width card "Item dengan stok lama terbesar": table columns Item, Gudang,
+0–30 / 31–60 / 61–90 / 91–180 / >180 as quantities with unit (right-aligned), Nilai > 90 hari
+(right-aligned, 500), and a tiny inline 5-segment bar per row in the same ramp. Rows: Pipa Hollow
+4x4 tebal 2 mm (Tangerang), Plat Bordes 2 mm (Surabaya), Galvalum 0,35 mm (Tangerang), Cat Hijau
+Army (Surabaya), Besi Galvanis (Surabaya). On the Plat Bordes row, a grey note under the item:
+"Cepat terpakai, tetapi 125 pcs > 90 hari — cek FIFO".
+```
+
+### A20 — Panel item: Pipa Hollow
+
+```
+On the "Stok kritis" tab, the user clicked Pipa Hollow · Surabaya. Open a right-side panel 440px
+(white, soft shadow, page dimmed 20%). Title "Pipa Hollow · Gudang Surabaya", status pill
+"Perlu ditambah". Figures in a 2-column key-value well: Stok 432 batang · Outstanding SO 995 ·
+Buffer 60 · Pemakaian 32,6 batang/hari · Lead time 21 hari · Titik pesan ulang 1.740 ·
+Saran tambah 1.308 batang (500 weight).
+Section "Di gudang lain": "Gudang Tangerang · stok 259 · juga Waspada" with a grey note
+"Mutasi tidak menutup kekurangan".
+Section "Umur stok": the 5-segment bar for this item (289 · 80 · 38 · 19 · 6 batang).
+Section "Menunggu barang ini": 3 SO rows (SO/SBY/2610/0142 PT Maju Lancar 521, SO/SBY/2610/0139
+PT Maju Terus 432, SO/SBY/2610/0156 PT Bumi Cipta Steel 42) with a link "Buka Outstanding Penjualan".
+```
+
+### A21 — Versi ponsel (390px)
+
+```
+Create a 390px mobile version of "Stok Kritis & Aging", tab "Stok kritis". Top bar 48px with menu,
+title and bell. Finding sentence, then tabs "Stok kritis 7 | Aging" scrolling sideways, and one
+filter row (gudang select + "Filter" button). KPI 2×2. "Prioritas pesan ulang" as cards-in-a-list:
+line 1 status pill + item + warehouse, line 2 the coverage bar with the lead-time tick full width,
+line 3 grey "Stok 432 · SO 995 · Saran +1.308 batang". 44px touch targets.
+```
+
+### B5 — Agent: bangun halaman Stok Kritis & Aging
+
+```
+Gunakan skill design-taste-frontend (references/app-screens.md). Bangun Gudang › Stok Kritis &
+Aging di route /gudang/kritis mengikuti DESIGN.md §18 dan arah Stitch yang dipilih (docs/stitch/).
+Data dari docs/data/stok-kritis-aging-30-okt-2026.json ke resources/js/data/stok.ts; stok, buffer
+dan outstanding harus sama dengan data Outstanding Penjualan dan Posisi Stok (satu sumber).
+console.assert: jumlah kelompok umur = stok per baris; nilai per kelompok menjumlah ke
+Rp 1.874.676.700; status dan saran tambah sesuai rumus §18.
+Tab Stok kritis / Aging sebagai route anak (/gudang/kritis dan /gudang/kritis?tab=aging), panel
+item, dan widget Ringkasan baru "Stok kritis" (M) menggantikan widget lama. Item Perlu ditambah
+dan Memakai buffer masuk "Perlu perhatian". Jalankan typecheck, preview:build, lint, inspect.
+```
+
+---
+
 ## Urutan kerja yang disarankan
 
 1. Konfirmasi sub-menu dan KPI (DESIGN.md §11) dengan manajemen.

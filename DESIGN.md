@@ -600,3 +600,61 @@ SO belum terkirim (19 SO, 18 customer, 34 baris item, total Rp 829.750.774):
 
 **Kata dan format:** "Pesanan belum terkirim", "Perlu ditambah", "Memakai buffer", "Cukup",
 "Sisa", "Buffer". Kuantitas dengan satuan (`995 batang`, `7 pail`, `446 pcs`). Nominal tabel rupiah penuh.
+
+---
+
+## 18. Gudang › Stok Kritis & Aging (draf untuk eksplorasi Stitch)
+
+Belum ada contoh laporan dari pengguna. Konsep ini usulan dan masih bisa berubah setelah review Stitch.
+Data contoh melanjutkan §17: item, gudang, stok, buffer, dan outstanding SO sama persis.
+
+**Dua pertanyaan, satu halaman, dua tab:**
+- **Stok kritis** — barang apa yang harus dipesan atau dipindah sekarang, supaya pesanan tidak tertunda?
+- **Aging** — berapa uang yang tertahan di barang lama atau lambat terjual?
+
+**Istilah dan rumus (per item per gudang)**
+- Stok tersedia = Stok − Outstanding SO.
+- Pemakaian/hari = rata-rata keluar 30 hari terakhir. Cakupan = Stok tersedia ÷ Pemakaian/hari (hari).
+- Lead time = hari dari pesan sampai barang tiba.
+- Titik pesan ulang = Pemakaian/hari × Lead time + Buffer + Outstanding.
+- Saran tambah = Titik pesan ulang − Stok (dibulatkan ke atas), hanya jika status bukan Aman.
+- Status, urut dari terparah: **Perlu ditambah** (stok < outstanding) · **Memakai buffer**
+  (stok − buffer − outstanding < 0) · **Waspada** (stok < titik pesan ulang) · **Aman**.
+  Dua status pertama sama dengan §17.
+- Umur stok = umur batch sejak tanggal masuk (FIFO). Kelompok: 0–30, 31–60, 61–90, 91–180, >180 hari.
+- Nilai = Stok × HPP. **Stok lama** = umur > 90 hari. **Lambat bergerak** = tidak ada pemakaian, atau cakupan > 120 hari.
+
+**Data contoh** (lengkap: `docs/data/stok-kritis-aging-30-okt-2026.json`, 20 baris item × gudang)
+
+Stok kritis (7 dari 20):
+
+| Item | Gudang | Stok | Outstanding | Buffer | Pemakaian/hari | Lead time | Cakupan | Status | Saran tambah |
+|---|---|---:|---:|---:|---:|---:|---:|---|---:|
+| Pipa Hollow | Surabaya | 432 | 995 | 60 | 32,6 | 21 | 0 hari | Perlu ditambah | 1.308 batang |
+| Cat Orange | Tangerang | 10 | 7 | 6 | 1,7 | 10 | 1,8 hari | Memakai buffer | 20 pail |
+| Kawat Bendrat | Tangerang | 35 | 0 | 40 | 6,8 | 7 | 5,1 hari | Memakai buffer | 53 pcs |
+| Pipa Hollow | Tangerang | 259 | 80 | 60 | 38,0 | 21 | 4,7 hari | Waspada | 679 batang |
+| Plat Bordes 2 mm | Tangerang | 188 | 61 | 40 | 22,7 | 21 | 5,6 hari | Waspada | 390 pcs |
+| CNP 1.8MM | Surabaya | 74 | 12 | 40 | 10,2 | 14 | 6,1 hari | Waspada | 121 pcs |
+| Wiremesh M8 | Tangerang | 265 | 138 | 40 | 9,4 | 14 | 13,5 hari | Waspada | 45 pcs |
+
+Catatan untuk desain: Pipa Hollow kritis di **kedua** gudang, jadi mutasi antar gudang tidak cukup.
+Untuk CNP 1.8MM, Gudang Tangerang punya 509 pcs dengan cakupan 51,7 hari, jadi mutasi bisa menjadi saran.
+
+Aging (nilai persediaan Rp 1.874.676.700):
+
+| Umur | 0–30 | 31–60 | 61–90 | 91–180 | >180 |
+|---|---:|---:|---:|---:|---:|
+| Nilai | 980.629.700 | 401.560.800 | 214.656.400 | 154.273.000 | 123.556.800 |
+
+Stok lama (> 90 hari) Rp 277,8 jt = 14,8% dari nilai persediaan. Gudang Surabaya Rp 1,33 M,
+Gudang Tangerang Rp 540,8 jt; stok lama Tangerang Rp 139,5 jt (25,8%) jauh di atas Surabaya.
+Lambat bergerak (3 item, Rp 212,9 jt): Cat Hijau Army (Surabaya, 38 pail, tanpa pemakaian
+90 hari), Pipa Hollow 4x4 tebal 2 mm (Tangerang, 415 batang, cakupan 692 hari), Galvalum 0,35 mm
+(Tangerang, 1.180 pcs, cakupan 281 hari). Plat Bordes 2 mm Surabaya cepat terpakai tetapi punya
+125 pcs berumur > 90 hari (petunjuk FIFO tidak dijalankan).
+
+**Susunan halaman (1440px):** judul + kalimat temuan; tab `Stok kritis | Aging`; scope gudang, kategori,
+cari. Elemen khas tab Stok kritis: **daftar prioritas pesan ulang** dengan garis cakupan hari vs lead
+time. Elemen khas tab Aging: **tangga umur stok** (100% stacked bar per gudang, kelompok umur dari
+terang ke gelap) dan peta item nilai × cakupan untuk menemukan barang lambat bergerak.
